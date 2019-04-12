@@ -12,7 +12,7 @@ ENV OPENVPN_USER=**None** \
     OPENVPN_PASS=**None** \
     OPENVPN_PROV=**None** \
     OPENVPN_OPTS= \
-    LOCAL_NETWORK=192.168.0.0/16
+    LOCAL_NETWORK=10.10.1.0/24
 
 VOLUME /etc/openvpn
 CMD ["dumb-init", "/etc/openvpn/start.sh"]
