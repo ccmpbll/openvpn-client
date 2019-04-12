@@ -1,56 +1,56 @@
 #!/bin/bash
-VPN_PROVIDER="${OPENVPN_PROVIDER,,}"
+VPN_PROVIDER="${OPENVPN_PROV,,}"
 VPN_PROVIDER_CONFIGS="/etc/openvpn/${VPN_PROVIDER}"
 
-if [[ "${OPENVPN_PROVIDER}" == "**None**" ]] || [[ -z "${OPENVPN_PROVIDER-}" ]]; then
+if [[ "${OPENVPN_PROV}" == "**None**" ]] || [[ -z "${OPENVPN_PROV-}" ]]; then
   echo "OpenVPN provider not set. Exiting."
   exit 1
 elif [[ ! -d "${VPN_PROVIDER_CONFIGS}" ]]; then
-  echo "Could not find OpenVPN provider: ${OPENVPN_PROVIDER}"
+  echo "Could not find OpenVPN provider: ${OPENVPN_PROV}"
   echo "Please check your settings."
   exit 1
 fi
 
-echo "Using OpenVPN provider: ${OPENVPN_PROVIDER}"
+echo "Using OpenVPN provider: ${OPENVPN_PROV}"
 
-if [[ -n "${OPENVPN_CONFIG-}" ]]; then
-  readarray -t OPENVPN_CONFIG_ARRAY <<< "${OPENVPN_CONFIG//,/$'\n'}"
+if [[ -n "${OPENVPN_CONF-}" ]]; then
+  readarray -t OPENVPN_CONF_ARRAY <<< "${OPENVPN_CONF//,/$'\n'}"
   ## Trim leading and trailing spaces from all entries. Inefficient as all heck, but works like a champ.
-  for i in "${!OPENVPN_CONFIG_ARRAY[@]}"; do
-    OPENVPN_CONFIG_ARRAY[${i}]="${OPENVPN_CONFIG_ARRAY[${i}]#"${OPENVPN_CONFIG_ARRAY[${i}]%%[![:space:]]*}"}"
-    OPENVPN_CONFIG_ARRAY[${i}]="${OPENVPN_CONFIG_ARRAY[${i}]%"${OPENVPN_CONFIG_ARRAY[${i}]##*[![:space:]]}"}"
+  for i in "${!OPENVPN_CONF_ARRAY[@]}"; do
+    OPENVPN_CONF_ARRAY[${i}]="${OPENVPN_CONF_ARRAY[${i}]#"${OPENVPN_CONF_ARRAY[${i}]%%[![:space:]]*}"}"
+    OPENVPN_CONF_ARRAY[${i}]="${OPENVPN_CONF_ARRAY[${i}]%"${OPENVPN_CONF_ARRAY[${i}]##*[![:space:]]}"}"
   done
-  if (( ${#OPENVPN_CONFIG_ARRAY[@]} > 1 )); then
-    OPENVPN_CONFIG_RANDOM=$((RANDOM%${#OPENVPN_CONFIG_ARRAY[@]}))
-    echo "${#OPENVPN_CONFIG_ARRAY[@]} servers found in OPENVPN_CONFIG, ${OPENVPN_CONFIG_ARRAY[${OPENVPN_CONFIG_RANDOM}]} chosen randomly"
-    OPENVPN_CONFIG="${OPENVPN_CONFIG_ARRAY[${OPENVPN_CONFIG_RANDOM}]}"
+  if (( ${#OPENVPN_CONF_ARRAY[@]} > 1 )); then
+    OPENVPN_CONF_RANDOM=$((RANDOM%${#OPENVPN_CONF_ARRAY[@]}))
+    echo "${#OPENVPN_CONF_ARRAY[@]} servers found in OPENVPN_CONF, ${OPENVPN_CONF_ARRAY[${OPENVPN_CONF_RANDOM}]} chosen randomly"
+    OPENVPN_CONF="${OPENVPN_CONF_ARRAY[${OPENVPN_CONF_RANDOM}]}"
   fi
 
-  if [[ -f "${VPN_PROVIDER_CONFIGS}/${OPENVPN_CONFIG}.ovpn" ]]; then
-    echo "Starting OpenVPN using config ${OPENVPN_CONFIG}.ovpn"
-    OPENVPN_CONFIG="${VPN_PROVIDER_CONFIGS}/${OPENVPN_CONFIG}.ovpn"
+  if [[ -f "${VPN_PROVIDER_CONFIGS}/${OPENVPN_CONF}.ovpn" ]]; then
+    echo "Starting OpenVPN using config ${OPENVPN_CONF}.ovpn"
+    OPENVPN_CONF="${VPN_PROVIDER_CONFIGS}/${OPENVPN_CONF}.ovpn"
   else
-    echo "Supplied config ${OPENVPN_CONFIG}.ovpn could not be found."
+    echo "Supplied config ${OPENVPN_CONF}.ovpn could not be found."
     echo "Using default OpenVPN gateway for provider ${VPN_PROVIDER}"
-    OPENVPN_CONFIG="${VPN_PROVIDER_CONFIGS}/default.ovpn"
+    OPENVPN_CONF="${VPN_PROVIDER_CONFIGS}/default.ovpn"
   fi
 else
   echo "No VPN configuration provided. Using default."
-  OPENVPN_CONFIG="${VPN_PROVIDER_CONFIGS}/default.ovpn"
+  OPENVPN_CONF="${VPN_PROVIDER_CONFIGS}/default.ovpn"
 fi
 
 # add OpenVPN user/pass
-if [[ "${OPENVPN_USERNAME}" == "**None**" ]] || [[ "${OPENVPN_PASSWORD}" == "**None**" ]] ; then
+if [[ "${OPENVPN_USER}" == "**None**" ]] || [[ "${OPENVPN_PASS}" == "**None**" ]] ; then
   if [[ ! -f /config/openvpn-credentials.txt ]] ; then
     echo "OpenVPN credentials not set. Exiting."
     exit 1
   fi
-  echo "Found existing OPENVPN credentials..."
+  echo "Found existing OpenVPN credentials..."
 else
-  echo "Setting OPENVPN credentials..."
+  echo "Setting OpenVPN credentials..."
   mkdir -p /config
-  echo "${OPENVPN_USERNAME}" > /config/openvpn-credentials.txt
-  echo "${OPENVPN_PASSWORD}" >> /config/openvpn-credentials.txt
+  echo "${OPENVPN_USER}" > /config/openvpn-credentials.txt
+  echo "${OPENVPN_PASS}" >> /config/openvpn-credentials.txt
   chmod 600 /config/openvpn-credentials.txt
 fi
 
@@ -68,4 +68,4 @@ if [[ -n "${LOCAL_NETWORK-}" ]]; then
   fi
 fi
 
-exec openvpn ${OPENVPN_OPTS} --config "${OPENVPN_CONFIG}"
+exec openvpn ${OPENVPN_OPTS} --config "${OPENVPN_CONF}"
