@@ -2,8 +2,6 @@ FROM balenalib/rpi-raspbian:latest
 LABEL Name=openvpn-client Version=0.1
 LABEL maintainer="Chris Campbell"
 
-RUN [ "cross-build-start" ]
-
 RUN apt-get update && apt-get -y upgrade \
     && apt-get -y install dumb-init iputils-ping iproute2 openvpn jq net-tools traceroute \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -18,5 +16,3 @@ ENV OPENVPN_USER=**None** \
 
 VOLUME /etc/openvpn
 CMD ["dumb-init", "/etc/openvpn/start.sh"]
-
-RUN [ "cross-build-end" ]
