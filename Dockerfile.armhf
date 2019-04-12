@@ -1,10 +1,10 @@
-FROM balenalib/rpi-raspbian:latest
+FROM lsiobase/alpine.armhf
 LABEL Name=openvpn-client Version=0.1
 LABEL maintainer="Chris Campbell"
 
-RUN apt-get update && apt-get -y upgrade \
-    && apt-get -y install dumb-init iputils-ping iproute2 openvpn jq net-tools traceroute \
-    && apt-get clean
+RUN apk update && apk upgrade \
+    && apk --no-cache add bash dumb-init openvpn shadow curl jq \
+    && rm -rf /tmp/* /var/tmp/*
 
 COPY openvpn/ /etc/openvpn/
 
