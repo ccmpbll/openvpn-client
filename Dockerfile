@@ -2,13 +2,11 @@ FROM alpine:latest
 LABEL Name=openvpn-client Version=0.1
 LABEL maintainer="Chris Campbell"
 
-RUN apk update && apk upgrade \
-    && apk --no-cache add bash dumb-init openvpn shadow curl jq \
+RUN apk --no-cache --no-progress update && apk --no-cache --no-progress upgrade \
+    && apk --no-cache --no-progress add bash tini openvpn shadow curl jq net-tools traceroute \
     && rm -rf /tmp/* /var/tmp/*
 
 COPY openvpn/ /etc/openvpn/
-
-RUN ["chmod", "+x", "/etc/openvpn/start.sh"]
 
 ENV CONFIG_PATH="/config" \
     OPENVPN_CONF=NONE \
@@ -17,5 +15,5 @@ ENV CONFIG_PATH="/config" \
     OPENVPN_OPTS= \
     LOCAL_NETWORK=10.10.1.0/24
 
-VOLUME /config
-CMD ["dumb-init", "/etc/openvpn/start.sh"]
+VOLUME ["/config"]
+ENTRYPOINT ["tini", "--", "/etc/openvpn/start.sh"]
