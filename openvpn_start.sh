@@ -28,4 +28,7 @@ else
   exit 1
 fi
 
+mkdir -p /dev/net
+[[ -c /dev/net/tun ]] || mknod -m 0666 /dev/net/tun c 10 200
+
 exec openvpn --config "${CONFIG_PATH}/${OPENVPN_CONF}" --auth-user-pass "${CONFIG_PATH}/${OPENVPN_AUTH}" --auth-nocache ${OPENVPN_OPTS}
