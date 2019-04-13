@@ -2,11 +2,7 @@
 
 Docker OpenVPN Client
 
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ccmpbll/openvpn-client.svg?style=flat-square) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ccmpbll/openvpn-client.svg?style=flat-square) ![Docker Pulls](https://img.shields.io/docker/pulls/ccmpbll/openvpn-client.svg?style=flat-square) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)
-
-![](https://img.shields.io/static/v1.svg?label=Image&message=Alpine&color=blue&style=flat-square) ![Layers](https://img.shields.io/microbadger/layers/ccmpbll/openvpn-client/latest.svg?style=flat-square) ![Size](https://img.shields.io/microbadger/image-size/ccmpbll/openvpn-client/latest.svg?style=flat-square)
-
-![](https://img.shields.io/static/v1.svg?label=Image&message=Ubuntu&color=blue&style=flat-square) ![Layers](https://img.shields.io/microbadger/layers/ccmpbll/openvpn-client/ubuntu.svg?style=flat-square) ![Size](https://img.shields.io/microbadger/image-size/ccmpbll/openvpn-client/ubuntu.svg?style=flat-square)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ccmpbll/openvpn-client.svg?style=flat-square) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ccmpbll/openvpn-client.svg?style=flat-square) ![Docker Pulls](https://img.shields.io/docker/pulls/ccmpbll/openvpn-client.svg?style=flat-square) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square) ![Layers](https://img.shields.io/microbadger/layers/ccmpbll/openvpn-client/latest.svg?style=flat-square) ![Size](https://img.shields.io/microbadger/image-size/ccmpbll/openvpn-client/latest.svg?style=flat-square)
 
 
 Docker container that supports many commercial OpenVPN providers and self-hosted OpenVPN servers. I wanted these images to be as small as possible, so no provider configuration files are included. You will need to provide them yourself.
