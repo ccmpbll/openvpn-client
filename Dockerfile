@@ -7,6 +7,7 @@ RUN apk --no-cache --no-progress update && apk --no-cache --no-progress upgrade 
     && rm -rf /tmp/* /var/tmp/*
 
 COPY openvpn_start.sh /usr/bin
+RUN ["chmod", "+x", "/usr/bin/openvpn_start.sh"]
 
 ENV CONFIG_PATH="/config" \
     OPENVPN_CONF=NONE \
