@@ -7,43 +7,15 @@ Docker OpenVPN Client
 
 Docker container that supports many commercial OpenVPN providers and self-hosted OpenVPN servers. I wanted these images to be as small as possible, so no provider configuration files are included. You will need to provide them yourself.
 
-Credit for original work goes to [jsloan117](https://hub.docker.com/r/jsloan117/docker-openvpn-client) and [haugene](https://github.com/haugene/docker-transmission-openvpn) - Thank you guys for hard work and making this easy for a noob.
-
-
-
 ## Run from Docker Hub
 
-Place your *.ovpn file in `/some/path/providername`. 
+Place your *.ovpn and auth files in `/some/path/`.
 
 ```bash
-$ docker run --cap-add=NET_ADMIN --device=/dev/net/tun -d --name openvpn_client \
--v /etc/localtime:/etc/localtime:ro \
--v /some/path:/etc/openvpn:rw \
--e OPENVPN_PROV=providername \
--e OPENVPN_CONF=config \
--e OPENVPN_USER=username \
--e OPENVPN_PASS=password \
+$ docker run --cap-add=NET_ADMIN -d --name openvpn_client \
+-v /some/path:/config:rw \
+-e OPENVPN_CONF=config.ovpn \
+-e OPENVPN_AUTH=auth.txt \
 -e OPENVPN_OPTS= \
--e LOCAL_NETWORK=10.10.1.0/24 \
--p 1194:1194 --dns 1.1.1.1 --dns 9.9.9.9 \
 ccmpbll/openvpn-client
-
 ```
-
-### Required Environment Variables
-
-| Variable | Function | Example |
-|----------|----------|-------|
-| `OPENVPN_PROV` | VPN provider | `OPENVPN_PROV=provider` |
-| `OPENVPN_CONF` | Config file to use | `OPENVPN_CONF=config` |
-| `OPENVPN_USER` | VPN username | `OPENVPN_USER=username` |
-| `OPENVPN_PASS` | VPN password | `OPENVPN_PASS=password` |
-| `LOCAL_NETWORK` | Local network allowed across tunnel. Accepts comma separated list. | `LOCAL_NETWORK=10.10.1.0/24` |
-
-### Optional Environment Variables
-
-| Variable | Function | Example |
-|----------|----------|-------|
-| `OPENVPN_OPTS` | OpenVPN startup options | See [OpenVPN doc](https://openvpn.net/index.php/open-source/documentation/manuals/65-openvpn-20x-manpage.html) |
-
-
