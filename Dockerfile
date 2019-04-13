@@ -8,6 +8,8 @@ RUN apk update && apk upgrade \
 
 COPY openvpn/ /etc/openvpn/
 
+RUN ["chmod", "+x", "/etc/openvpn/start.sh"]
+
 ENV CONFIG_PATH="/config" \
     OPENVPN_CONF=NONE \
     OPENVPN_USER=NONE \
