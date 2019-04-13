@@ -28,7 +28,10 @@ else
   exit 1
 fi
 
+echo "Creating /dev/tun interface..."
 mkdir -p /dev/net
-[[ -c /dev/net/tun ]] || mknod -m 0666 /dev/net/tun c 10 200
+[[ -c /dev/net/tun ]] || mknod -m 0600 /dev/net/tun c 10 200
 
+#Initiate connection
+echo "Initiating connection..."
 exec openvpn --config "${CONFIG_PATH}/${OPENVPN_CONF}" --auth-user-pass "${CONFIG_PATH}/${OPENVPN_AUTH}" --auth-nocache ${OPENVPN_OPTS}
