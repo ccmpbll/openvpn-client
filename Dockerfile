@@ -3,16 +3,17 @@ LABEL Name=openvpn-client Version=0.1
 LABEL maintainer="Chris Campbell"
 
 RUN apk update && apk upgrade \
-    && apk --no-cache add bash dumb-init openvpn shadow curl jq \
+    && apk --no-cache add bash dumb-init openvpn shadow curl jq net-tools traceroute \
     && rm -rf /tmp/* /var/tmp/*
 
 COPY openvpn/ /etc/openvpn/
 
-ENV OPENVPN_USER=**None** \
-    OPENVPN_PASS=**None** \
-    OPENVPN_PROV=**None** \
+ENV CONFIG_PATH="/config" \
+    OPENVPN_CONF=NONE \
+    OPENVPN_USER=NONE \
+    OPENVPN_PASS=NONE \
     OPENVPN_OPTS= \
     LOCAL_NETWORK=10.10.1.0/24
 
-VOLUME /etc/openvpn
+VOLUME /config
 CMD ["dumb-init", "/etc/openvpn/start.sh"]
