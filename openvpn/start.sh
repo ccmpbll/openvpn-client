@@ -49,4 +49,4 @@ if [[ -n "${LOCAL_NETWORK-}" ]]; then
   fi
 fi
 
-exec openvpn ${OPENVPN_OPTS} --config "${OPENVPN_CONF}"
+exec openvpn ${OPENVPN_OPTS} --config "${CONFIG_PATH}/${OPENVPN_CONF}"
