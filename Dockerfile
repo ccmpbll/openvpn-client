@@ -6,14 +6,12 @@ RUN apk --no-cache --no-progress update && apk --no-cache --no-progress upgrade 
     && apk --no-cache --no-progress add bash tini openvpn shadow curl jq net-tools traceroute \
     && rm -rf /tmp/* /var/tmp/*
 
-COPY openvpn/ /etc/openvpn/
+COPY openvpn_start.sh /etc/openvpn/
 
 ENV CONFIG_PATH="/config" \
     OPENVPN_CONF=NONE \
-    OPENVPN_USER=NONE \
-    OPENVPN_PASS=NONE \
-    OPENVPN_OPTS= \
-    LOCAL_NETWORK=10.10.1.0/24
+    OPENVPN_AUTH=NONE \
+    OPENVPN_OPTS=
 
 VOLUME ["/config"]
-ENTRYPOINT ["tini", "--", "/etc/openvpn/start.sh"]
+ENTRYPOINT ["tini", "--", "/etc/openvpn/openvpn_start.sh"]
