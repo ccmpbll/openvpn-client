@@ -3,7 +3,7 @@ LABEL Name=openvpn-client Version=0.1
 LABEL maintainer="Chris Campbell"
 
 RUN apk --no-cache --no-progress update && apk --no-cache --no-progress upgrade \
-    && apk --no-cache --no-progress add bash tini openvpn shadow curl jq net-tools traceroute \
+    && apk --no-cache --no-progress add bash curl jq openvpn shadow tini \
     && rm -rf /tmp/* /var/tmp/*
 
 COPY openvpn_start.sh /etc/openvpn/
