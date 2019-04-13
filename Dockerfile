@@ -3,7 +3,7 @@ LABEL Name=openvpn-client Version=0.1
 LABEL maintainer="Chris Campbell"
 
 RUN apk update && apk upgrade \
-    && apk --no-cache add bash dumb-init openvpn shadow curl jq net-tools traceroute \
+    && apk --no-cache add bash dumb-init openvpn shadow curl jq \
     && rm -rf /tmp/* /var/tmp/*
 
 COPY openvpn/ /etc/openvpn/
