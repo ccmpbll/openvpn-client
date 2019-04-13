@@ -30,7 +30,7 @@ else
 fi
 
 if [[ -z "${OPENVPN_OPTS}" ]]; then
-  export OPENVPN_OPTS = "--auth-user-pass /config/openvpn-credentials.txt"  
+  export OPENVPN_OPTS="--auth-user-pass /config/openvpn-credentials.txt"  
 else
   export OPENVPN_OPTS+=" --auth-user-pass /config/openvpn-credentials.txt"
 fi
