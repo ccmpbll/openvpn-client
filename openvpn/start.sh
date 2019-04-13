@@ -9,6 +9,7 @@ fi
 #Check if config file exists
 if [[ -f "${CONFIG_PATH}/${OPENVPN_CONF}" ]]; then
   echo "Using supplied OpenVPN config: ${CONFIG_PATH}/${OPENVPN_CONF}"
+  chmod 600 ${CONFIG_PATH}/${OPENVPN_CONF}
 else
   echo "Supplied OpenVPN config ${CONFIG_PATH}/${OPENVPN_CONF} could not be found."
   exit 1
@@ -29,9 +30,9 @@ else
 fi
 
 if [[ -z "${OPENVPN_OPTS}" ]]; then
-  OPENVPN_OPTS = "--auth-user-pass /config/openvpn-credentials.txt"  
+  export OPENVPN_OPTS = "--auth-user-pass /config/openvpn-credentials.txt"  
 else
-  OPENVPN_OPTS+=" --auth-user-pass /config/openvpn-credentials.txt"
+  export OPENVPN_OPTS+=" --auth-user-pass /config/openvpn-credentials.txt"
 fi
 
 #If we use LOCAL_NETWORK we need to grab network config info
