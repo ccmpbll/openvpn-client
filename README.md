@@ -15,6 +15,8 @@ myCoolUsername
 mySuperSecretPassword
 ```
 
+Once your files are in place, run the container:
+
 ```bash
 $ docker run --cap-add=NET_ADMIN -d --name openvpn_client \
 -v /some/path:/config:rw \
@@ -23,6 +25,5 @@ $ docker run --cap-add=NET_ADMIN -d --name openvpn_client \
 -e OPENVPN_OPTS= \
 ccmpbll/openvpn-client
 ```
-
 
 I am open to suggestions and feedback, so let me know. Enjoy!
