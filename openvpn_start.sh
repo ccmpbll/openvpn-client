@@ -34,4 +34,4 @@ mkdir -p /dev/net
 
 #Initiate connection
 echo "Initiating connection..."
-exec openvpn --config "${CONFIG_PATH}/${OPENVPN_CONF}" --auth-user-pass "${CONFIG_PATH}/${OPENVPN_AUTH}" --auth-nocache ${OPENVPN_OPTS}
+exec openvpn --ping-restart 30 --config "${CONFIG_PATH}/${OPENVPN_CONF}" --auth-user-pass "${CONFIG_PATH}/${OPENVPN_AUTH}" --auth-nocache ${OPENVPN_OPTS}
