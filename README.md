@@ -4,8 +4,6 @@
 
 A simple, easy to use Docker OpenVPN client that supports commercial OpenVPN providers and self-hosted OpenVPN servers. I wanted this image to be as small as possible, so no provider configuration files are included. You will need to provide them yourself.
 
-## Run from Docker Hub
-
 Place your *.ovpn and auth files in `/some/path/`. The auth file can be named anything, but should be formatted like this:
 
 ```
