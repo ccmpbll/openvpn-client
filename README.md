@@ -1,6 +1,6 @@
 # openvpn-client
 
-![Image Build Status](https://img.shields.io/github/workflow/status/ccmpbll/openvpn-client/Docker%20Image%20CI?style=flat-square) ![Docker Image Size](https://img.shields.io/docker/image-size/ccmpbll/openvpn-client/latest?style=flat-square) ![Docker Pulls](https://img.shields.io/docker/pulls/ccmpbll/openvpn-client.svg?style=flat-square) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)
+![Image Build Status](https://img.shields.io/github/actions/workflow/status/ccmpbll/openvpn-client/docker-image.yml?branch=main) ![Docker Image Size](https://img.shields.io/docker/image-size/ccmpbll/openvpn-client/latest) ![Docker Pulls](https://img.shields.io/docker/pulls/ccmpbll/openvpn-client.svg) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 A simple, easy to use Docker OpenVPN client that supports commercial OpenVPN providers and self-hosted OpenVPN servers. I wanted this image to be as small as possible, so no provider configuration files are included. You will need to provide them yourself.
 
